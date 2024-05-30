@@ -1,9 +1,9 @@
 define bowerbird::git-dependency
     WORKDIR_DEPS ?= $$(error ERROR: Undefined variable WORKDIR_DEPS)
-    $(eval $(call bowerbird::deps::__create-dep-variable,$(1),$(3)))
-    $(eval $(call bowerbird::deps::__create-dep-variable,$(1)_URL,$(2)))
-    $(eval $(call bowerbird::deps::__create-dep-variable,$(1)_DIR,$(WORKDIR_DEPS)/$(basename $(notdir $(2)))))
-    $(eval $(call bowerbird::deps::__create-dep-variable,$(1).MK,$(WORKDIR_DEPS)/$(basename $(notdir $(2)))/$(4)))
+    $(eval $(call bowerbird::deps::define-constant,$(1),$(3)))
+    $(eval $(call bowerbird::deps::define-constant,$(1)_URL,$(2)))
+    $(eval $(call bowerbird::deps::define-constant,$(1)_DIR,$(WORKDIR_DEPS)/$(basename $(notdir $(2)))))
+    $(eval $(call bowerbird::deps::define-constant,$(1).MK,$(WORKDIR_DEPS)/$(basename $(notdir $(2)))/$(4)))
 
     $($(1)_DIR)/.:
 		@echo "Cloning from '$($(1)_URL)'..."
@@ -32,7 +32,7 @@ define bowerbird::git-dependency
 endef
 
 
-define bowerbird::deps::__create-dep-variable
+define bowerbird::deps::define-constant
     ifndef $(1)
         $(1) = $(2)
     else
