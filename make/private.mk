@@ -13,7 +13,7 @@ override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 
 # Includes
 include bowerbird.mk
-# include test/bowerbird-paths/test-directory-target.mk
+include test/bowerbird-deps/test-create-dep-variable.mk
 
  # Targets
 .PHONY: private_clean
@@ -25,6 +25,6 @@ private_clean:
 	@echo "INFO: Cleaning complete."
 	@echo
 
-# .PHONY: private_test
-# private_test: \
-# 		test-directory-target \
+.PHONY: private_test
+private_test: \
+		test-create-dep-variable \
