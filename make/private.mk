@@ -8,8 +8,7 @@ MAKEFLAGS += --no-print-directory
 NAME ?= $(error ERROR: Undefined variable NAME)
 VERSION ?= $(error ERROR: Undefined variable VERSION)
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
-override WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
-override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
+WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
 
 # Includes
 include bowerbird.mk

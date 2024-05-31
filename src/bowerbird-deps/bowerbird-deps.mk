@@ -1,20 +1,23 @@
 define bowerbird::git-dependency
-    $(eval $(call bowerbird::deps::define-dependency-constants,$(1),$(2),$(3),$(4)))
-
-    $($(1)_DIR)/.:
+    $(eval $(call bowerbird::deps::define-dependency-constants,DEPENDENCY_$(basename $(notdir $(1))),$(1),$(2),$(3)))
+    $(DEPENDENCY_$(basename $(notdir $(1)))_DIR)/.:
 		@echo "Cloning from '$($(1)_URL)'..."
-		@git clone --config advice.detachedHead=false --depth 1 $($(1)_URL) --branch $($(1)) $($(1)_DIR)
+		@git clone --config advice.detachedHead=false --depth 1 \
+				--branch $(DEPENDENCY_$(basename $(notdir $(1)))_VERSION) \
+				$(DEPENDENCY_$(basename $(notdir $(1)))_URL) \
+				$(DEPENDENCY_$(basename $(notdir $(1)))_DIR)
 
-    $($(1).MK): | $($(1)_DIR)/.
+    $(DEPENDENCY_$(basename $(notdir $(1))).MK): | $(DEPENDENCY_$(basename $(notdir $(1)))_DIR)/.
 		@test -d $$|
 		@test -f $$@ || (\
-			rm -rf $($(1)_DIR) && \
-			>&2 echo "ERROR: Expected entry point not found: $$@\nrm -rf $($(1)_DIR)\n" \
+			\rm -rf $(DEPENDENCY_$(basename $(notdir $(1)))_DIR) && \
+			>&2 echo "\nERROR: Expected entry point not found: $$@ \
+			\nrm -rf $(DEPENDENCY_$(basename $(notdir $(1)))_DIR)\n" \
 			&& exit 1\
 		)
 		@echo
 
-    include $($(1).MK)
+    include $(DEPENDENCY_$(basename $(notdir $(1))).MK)
 endef
 
 
@@ -30,8 +33,8 @@ endef
 
 define bowerbird::deps::define-dependency-constants
     WORKDIR_DEPS ?= $$(error ERROR: Undefined variable WORKDIR_DEPS)
-    $(eval $(call bowerbird::deps::define-constant,$(1),$(3)))
     $(eval $(call bowerbird::deps::define-constant,$(1)_URL,$(2)))
+    $(eval $(call bowerbird::deps::define-constant,$(1)_VERSION,$(3)))
     $(eval $(call bowerbird::deps::define-constant,$(1)_DIR,$(abspath $(WORKDIR_DEPS)/$(1))))
     $(eval $(call bowerbird::deps::define-constant,$(1).MK,$(abspath $($(1)_DIR)/$(4))))
 endef
