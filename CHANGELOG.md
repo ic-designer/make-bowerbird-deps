@@ -15,11 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased] - YYYY-MM-DD
+## [0.1.0] - 2024-05-31
 
 ### Added
-- Migrated the path target to a separate repo.
-### Changed
-### Deprecated
-### Fixed
-### Security
+- Created a README with usage example.
+- Migrated the bash build recipes to a separate repo.
