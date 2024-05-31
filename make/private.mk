@@ -15,6 +15,7 @@ override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 include bowerbird.mk
 include test/bowerbird-deps/test-define-constant.mk
 include test/bowerbird-deps/test-define-dependency-constants.mk
+include test/bowerbird-deps/test-git-dependency.mk
 
  # Targets
 .PHONY: private_clean
@@ -30,3 +31,4 @@ private_clean:
 private_test: \
 		test-define-constant \
 		test-define-dependency-constants \
+		test-git-dependency \

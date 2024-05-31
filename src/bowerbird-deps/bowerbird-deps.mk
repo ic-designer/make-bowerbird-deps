@@ -14,18 +14,9 @@ define bowerbird::git-dependency
 		)
 		@echo
 
-    ifeq (,$(filter $($(1).MK),$(MAKECMDGOALS)))
-        ifeq (,$(wildcard $($(1).MK)))
-            $$(shell $(MAKE) $($(1).MK))
-        endif
-        ifeq (,$(wildcard $($(1).MK)))
-            $$(error ERROR: Failed to generate expected include file '$($(1).MK)')
-        endif
-        include $($(1).MK)
-    else
-        -include $($(1).MK)
-    endif
+    include $($(1).MK)
 endef
+
 
 define bowerbird::deps::define-constant
     ifndef $(1)
