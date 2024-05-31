@@ -10,8 +10,10 @@ NAME ?= $(error ERROR: Undefined variable NAME)
 VERSION ?= $(error ERROR: Undefined variable VERSION)
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
+WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 
 # Includes
+include make/deps.mk
 include bowerbird.mk
 include test/bowerbird-deps/test-define-constant.mk
 include test/bowerbird-deps/test-define-dependency-constants.mk
