@@ -19,14 +19,13 @@ define bowerbird::git-dependency
             $$(shell $(MAKE) $($(1).MK))
         endif
         ifeq (,$(wildcard $($(1).MK)))
-            $$(error )
+            $$(error ERROR: Failed to generate expected include file '$($(1).MK)')
         endif
         include $($(1).MK)
     else
         -include $($(1).MK)
     endif
 endef
-
 
 define bowerbird::deps::define-constant
     ifndef $(1)
