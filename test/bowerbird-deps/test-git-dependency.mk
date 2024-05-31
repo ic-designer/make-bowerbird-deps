@@ -9,56 +9,71 @@ test-git-dependency: \
 
 .PHONY: test-git-dependency-bowerbird-deps-success
 test-git-dependency-bowerbird-deps-success:
+	@mkdir -p $(WORKDIR_TEST)/$@
 	@$(MAKE) FORCE \
 			TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_SUCCESS=true \
 			WORKDIR_DEPS=$(WORKDIR_TEST)/$@/deps \
-			2>/dev/null 1>/dev/null
+			1>$(WORKDIR_TEST)/$@/$@.stdout.txt \
+			2>$(WORKDIR_TEST)/$@/$@.stderr.txt
+	@test -d $(WORKDIR_TEST)/$@/deps/MAKE_BOWERBIRD_DEPS
 	@printf "\e[1;32mPassed: $(lastword $(MAKEFILE_LIST))::$@\e[0m\n"
 
 ifdef TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_SUCCESS
-    $(eval $(call bowerbird::git-dependency,\
+    $(eval $(call bowerbird::git-dependency,MAKE_BOWERBIRD_DEPS,\
 			https://github.com/ic-designer/make-bowerbird-deps.git,main,bowerbird.mk))
 endif
 
 
 .PHONY: test-git-dependency-bowerbird-deps-bad-entry
 test-git-dependency-bowerbird-deps-bad-entry:
+	@mkdir -p $(WORKDIR_TEST)/$@
 	@! $(MAKE) FORCE \
 			TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_ENTRY=true \
 			WORKDIR_DEPS=$(WORKDIR_TEST)/$@/deps \
-			2>/dev/null 1>/dev/null
-	@! test -d $(WORKDIR_DEPS)/BOWERBIRD_DEPS_BAD_ENTRY
+			1>$(WORKDIR_TEST)/$@/$@.stdout.txt \
+			2>$(WORKDIR_TEST)/$@/$@.stderr.txt
+	@! test -d $(WORKDIR_TEST)/$@/deps/MAKE_BOWERBIRD_DEPS
 	@printf "\e[1;32mPassed: $(lastword $(MAKEFILE_LIST))::$@\e[0m\n"
 
 ifdef TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_ENTRY
-    $(eval $(call bowerbird::git-dependency,https://github.com/ic-designer/make-bowerbird-deps.git,main,))
+    $(eval $(call bowerbird::git-dependency,MAKE_BOWERBIRD_DEPS,\
+			https://github.com/ic-designer/make-bowerbird-deps.git,main,))
 endif
 
 
 .PHONY: test-git-dependency-bowerbird-deps-bad-url
 test-git-dependency-bowerbird-deps-bad-url:
-	@! $(MAKE) FORCE TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_URL=true 2>/dev/null 1>/dev/null
-	@! test -d $(WORKDIR_DEPS)/BOWERBIRD_DEPS_BAD_URL
+	@mkdir -p $(WORKDIR_TEST)/$@
+	@! $(MAKE) FORCE \
+			TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_URL=true \
+			WORKDIR_DEPS=$(WORKDIR_TEST)/$@/deps \
+			1>$(WORKDIR_TEST)/$@/$@.stdout.txt \
+			2>$(WORKDIR_TEST)/$@/$@.stderr.txt
+	@! test -d $(WORKDIR_TEST)/$@/deps/MAKE_BOWERBIRD_DEPS
 	@printf "\e[1;32mPassed: $(lastword $(MAKEFILE_LIST))::$@\e[0m\n"
 
 ifdef TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_URL
-    $(eval $(call bowerbird::git-dependency,BOWERBIRD_DEPS_BAD_URL,,main,bad-entry.mk))
+    $(eval $(call bowerbird::git-dependency,MAKE_BOWERBIRD_DEPS,,main,bowerbird.mk))
 endif
 
 
 .PHONY: test-git-dependency-bowerbird-deps-bad-version
 test-git-dependency-bowerbird-deps-bad-version:
-	@! $(MAKE) FORCE TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_VERSION=true 2>/dev/null 1>/dev/null
-	@! test -d $(WORKDIR_DEPS)/BOWERBIRD_DEPS_BAD_VERSION
+	@mkdir -p $(WORKDIR_TEST)/$@
+	@! $(MAKE) FORCE \
+			TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_VERSION=true \
+			WORKDIR_DEPS=$(WORKDIR_TEST)/$@/deps \
+			1>$(WORKDIR_TEST)/$@/$@.stdout.txt \
+			2>$(WORKDIR_TEST)/$@/$@.stderr.txt
+	@! test -d $(WORKDIR_TEST)/$@/deps/MAKE_BOWERBIRD_DEPS
 	@printf "\e[1;32mPassed: $(lastword $(MAKEFILE_LIST))::$@\e[0m\n"
 
 ifdef TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_VERSION
-    $(eval $(call bowerbird::git-dependency,BOWERBIRD_DEPS_BAD_VERSION,https://github.com/ic-designer/make-bowerbird-deps.git,,bowerbird.mk))
+        $(eval $(call bowerbird::git-dependency,MAKE_BOWERBIRD_DEPS,\
+			https://github.com/ic-designer/make-bowerbird-deps.git,,bowerbird.mk))
 endif
 
 
 .PHONY: FORCE
 FORCE:
 	@:
-
-https://github.com/ic-designer/make-bowerbird-deps.git,,bowerbird.mk))

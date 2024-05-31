@@ -1,23 +1,23 @@
-define bowerbird::git-dependency # url, vesion, entry
-    $(eval $(call bowerbird::deps::define-dependency-constants,DEPENDENCY_$(basename $(notdir $(1))),$(1),$(2),$(basename $(notdir $(1))),$(3)))
-    $(DEPENDENCY_$(basename $(notdir $(1)))_PATH)/.:
-		@echo "Cloning from '$($(1)_URL)'..."
+define bowerbird::git-dependency # id, url, vesion, entry
+    $(eval $(call bowerbird::deps::define-dependency-constants,_DEP_$(1),$(2),$(3),$(1),$(4)))
+    $(_DEP_$(1)_PATH)/.:
+		@echo "Cloning from '$(_DEP_$(1)_URL)'..." >&2
 		@git clone --config advice.detachedHead=false --depth 1 \
-				--branch $(DEPENDENCY_$(basename $(notdir $(1)))_VERSION) \
-				$(DEPENDENCY_$(basename $(notdir $(1)))_URL) \
-				$(DEPENDENCY_$(basename $(notdir $(1)))_PATH)
+				--branch $(_DEP_$(1)_VERSION) \
+				$(_DEP_$(1)_URL) \
+				$(_DEP_$(1)_PATH)
 
-    $(DEPENDENCY_$(basename $(notdir $(1))).MK): | $(DEPENDENCY_$(basename $(notdir $(1)))_PATH)/.
+    $(_DEP_$(1).MK): | $(_DEP_$(1)_PATH)/.
 		@test -d $$|
 		@test -f $$@ || (\
-			\rm -rf $(DEPENDENCY_$(basename $(notdir $(1)))_PATH) && \
+			\rm -rf $(_DEP_$(1)_PATH) && \
 			>&2 echo "\nERROR: Expected entry point not found: $$@ \
-			\nrm -rf $(DEPENDENCY_$(basename $(notdir $(1)))_PATH)\n" \
+			\nrm -rf $(_DEP_$(1)_PATH)\n" \
 			&& exit 1\
 		)
 		@echo
 
-    include $(DEPENDENCY_$(basename $(notdir $(1))).MK)
+    include $(_DEP_$(1).MK)
 endef
 
 
