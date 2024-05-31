@@ -6,6 +6,8 @@ define bowerbird::git-dependency # id, url, vesion, entry
 				--branch $(_DEP_$(1)_VERSION) \
 				$(_DEP_$(1)_URL) \
 				$(_DEP_$(1)_PATH)
+		@rm -rf $(_DEP_$(1)_PATH)/.git
+
 
     $(_DEP_$(1).MK): | $(_DEP_$(1)_PATH)/.
 		@test -d $$|
