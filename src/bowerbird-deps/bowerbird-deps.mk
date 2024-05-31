@@ -1,9 +1,5 @@
 define bowerbird::git-dependency
-    WORKDIR_DEPS ?= $$(error ERROR: Undefined variable WORKDIR_DEPS)
-    $(eval $(call bowerbird::deps::define-constant,$(1),$(3)))
-    $(eval $(call bowerbird::deps::define-constant,$(1)_URL,$(2)))
-    $(eval $(call bowerbird::deps::define-constant,$(1)_DIR,$(WORKDIR_DEPS)/$(basename $(notdir $(2)))))
-    $(eval $(call bowerbird::deps::define-constant,$(1).MK,$(WORKDIR_DEPS)/$(basename $(notdir $(2)))/$(4)))
+    $(eval $(call bowerbird::deps::define-dependency-constants,$(1),$(2),$(3),$(4)))
 
     $($(1)_DIR)/.:
 		@echo "Cloning from '$($(1)_URL)'..."
@@ -40,4 +36,12 @@ define bowerbird::deps::define-constant
             $$(error ERROR: Identified conflict with $(1): '$($(1))' != '$(2)' )
         endif
     endif
+endef
+
+define bowerbird::deps::define-dependency-constants
+    WORKDIR_DEPS ?= $$(error ERROR: Undefined variable WORKDIR_DEPS)
+    $(eval $(call bowerbird::deps::define-constant,$(1),$(3)))
+    $(eval $(call bowerbird::deps::define-constant,$(1)_URL,$(2)))
+    $(eval $(call bowerbird::deps::define-constant,$(1)_DIR,$(abspath $(WORKDIR_DEPS)/$(1))))
+    $(eval $(call bowerbird::deps::define-constant,$(1).MK,$(abspath $($(1)_DIR)/$(4))))
 endef
