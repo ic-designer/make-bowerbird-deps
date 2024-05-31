@@ -23,3 +23,7 @@ jobs:
       run: |
         make clean
         make test
+    - name: Run help
+      run: |
+        make clean
+        make help
