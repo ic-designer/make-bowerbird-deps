@@ -3,6 +3,7 @@
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --no-builtin-variables
 MAKEFLAGS += --no-print-directory
+MAKEFLAGS += --jobs
 
 # Constants
 NAME ?= $(error ERROR: Undefined variable NAME)
