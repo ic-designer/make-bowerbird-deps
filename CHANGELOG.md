@@ -15,6 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+
+### Added
+### Changed
+- Corrected the usage code snipped to work after direct copy and paste and to generate
+  errors if the download fails.
+### Deprecated
+### Fixed
+### Security
+
+
 ## [0.1.0] - 2024-05-31
 
 ### Added

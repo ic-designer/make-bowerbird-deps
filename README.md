@@ -16,9 +16,9 @@ WORKDIR_DEPS ?= $(error ERROR: Undefined variable WORKDIR_DEPS)
 # Load Bowerbird Dependency Tools
 BOWERBIRD_DEPS.MK := $(WORKDIR_DEPS)/BOWERBIRD_DEPS/bowerbird_deps.mk
 $(BOWERBIRD_DEPS.MK):
-	curl --create-dirs -o $@ -L \
-			https://raw.githubusercontent.com/ic-designer/make-bowerbird-deps/\
-			de3c33b1d19ab50ff1bd9b8e6e6d3cf1a5d4d2c3/src/bowerbird-deps/bowerbird-deps.mk
+	@curl --silent --show-error --fail --create-dirs -o $@ -L \
+https://raw.githubusercontent.com/ic-designer/make-bowerbird-deps/\
+de3c33b1d19ab50ff1bd9b8e6e6d3cf1a5d4d2c3/src/bowerbird-deps/bowerbird-deps.mk
 include $(BOWERBIRD_DEPS.MK)
 
 # Load Dependencies
