@@ -1,11 +1,12 @@
 define bowerbird::git-dependency # id, url, vesion, entry
     $(eval $(call bowerbird::deps::define-dependency-constants,BOWERBIRD_DEPENDENCY/$1,$2,$3,$1,$4))
     $(BOWERBIRD_DEPENDENCY/$1/PATH)/.:
-		@echo "Cloning from '$(BOWERBIRD_DEPENDENCY/$1/URL)'..." >&2
 		@git clone --config advice.detachedHead=false --depth 1 \
 				--branch $(BOWERBIRD_DEPENDENCY/$1/VERSION) \
 				$(BOWERBIRD_DEPENDENCY/$1/URL) \
-				$(BOWERBIRD_DEPENDENCY/$1/PATH)
+				$(BOWERBIRD_DEPENDENCY/$1/PATH) \
+                1>/dev/null \
+                2>/dev/null
 		@test -n $(BOWERBIRD_DEPENDENCY/$1/PATH)
 		@test -d $(BOWERBIRD_DEPENDENCY/$1/PATH)/.git
 		@rm -rf $(BOWERBIRD_DEPENDENCY/$1/PATH)/.git
@@ -19,7 +20,6 @@ define bowerbird::git-dependency # id, url, vesion, entry
 			\nrm -rf $(BOWERBIRD_DEPENDENCY/$1/PATH)\n" \
 			&& exit 1\
 		)
-		@echo
 
     include $(BOWERBIRD_DEPENDENCY/$1.MK)
 endef
