@@ -15,9 +15,6 @@ WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 # Includes
 include make/deps.mk
 include bowerbird.mk
-include test/bowerbird-deps/test-define-constant.mk
-include test/bowerbird-deps/test-define-dependency-constants.mk
-include test/bowerbird-deps/test-git-dependency.mk
 
  # Targets
 .PHONY: private_clean
@@ -29,8 +26,4 @@ private_clean:
 	@echo "INFO: Cleaning complete."
 	@echo
 
-.PHONY: private_test
-private_test: \
-		test-define-constant \
-		test-define-dependency-constants \
-		test-git-dependency \
+$(eval $(call bowerbird::generate-test-runner,private_test,test/,test*.mk))
