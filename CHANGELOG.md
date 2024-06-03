@@ -15,15 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased] - YYYY-MM-DD
+## [0.2.0] - 2024-06-03
 
-### Added
 ### Changed
 - Corrected the usage code snipped to work after direct copy and paste and to generate
   errors if the download fails.
-### Deprecated
-### Fixed
-### Security
+- Added additional checks to the path variables before deleting the `.git` directory
+  from the cloned dependency repos.
+- Changed the names of the internally used dependency constants.
+- Updated the tests to use the bowerbird test runner.
+- Added an error message when dependency cannot be cloned.
+- Updated the SHA in the readme usage example.
 
 
 ## [0.1.0] - 2024-05-31
