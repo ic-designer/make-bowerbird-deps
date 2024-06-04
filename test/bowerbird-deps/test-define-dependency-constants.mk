@@ -44,8 +44,8 @@ test-define-second-dependency-conflicting-entry:
 .PHONY:def-second-dependency-conflicting-entry
 def-second-dependency-conflicting-entry: WORKDIR_DEPS = deps/
 def-second-dependency-conflicting-entry:
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,version,entry/alpha))
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,version,entry/beta))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,version,path,entry/alpha))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,version,path,entry/beta))
 
 
 test-define-second-dependency-conflicting-path:
@@ -54,8 +54,8 @@ test-define-second-dependency-conflicting-path:
 .PHONY:def-second-dependency-conflicting-path
 def-second-dependency-conflicting-path: WORKDIR_DEPS = deps/
 def-second-dependency-conflicting-path:
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path/alpha,version,entry))
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path/beta,version,entry))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path/alpha,path,version,entry))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path/beta,path,version,entry))
 
 
 test-define-second-dependency-conflicting-url:
@@ -64,8 +64,8 @@ test-define-second-dependency-conflicting-url:
 .PHONY:def-second-dependency-conflicting-url
 def-second-dependency-conflicting-url: WORKDIR_DEPS = deps/
 def-second-dependency-conflicting-url:
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url/alpha,version,entry))
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url/beta,version,entry))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url/alpha,path,version,entry))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url/beta,path,version,entry))
 
 
 test-define-second-dependency-conflicting-version:
@@ -74,5 +74,5 @@ test-define-second-dependency-conflicting-version:
 .PHONY:def-second-dependency-conflicting-version
 def-second-dependency-conflicting-version: WORKDIR_DEPS = deps/
 def-second-dependency-conflicting-version:
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path,version/alpha,entry))
-	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path,version/beta,entry))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path,path,version/alpha,entry))
+	$(eval $(call bowerbird::deps::define-dependency-constants,ID,url,path,path,version/beta,entry))
