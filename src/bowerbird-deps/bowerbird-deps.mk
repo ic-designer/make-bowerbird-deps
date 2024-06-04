@@ -30,8 +30,8 @@ define bowerbird::deps::define-constant # name, value
     ifndef $1
         $1 = $2
     else
-        ifneq ($($1),$2)
-            $$(error ERROR: Identified conflict with $1: '$($1)' != '$2' )
+        ifneq ($$($1),$2)
+            $$(error ERROR: Identified conflict with $1: '$$($1)' != '$2' )
         endif
     endif
 endef
