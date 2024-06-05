@@ -15,6 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+
+### Added
+- Updated make flags to include warnings for undefined variables.
+### Changed
+- The first argument of the `bowerbird::git-dependency` macro changed from an ID to the
+  installation path.
+### Deprecated
+### Fixed
+- Fixed variables references in macros that cause undefined variable errors in repos
+  that use bowerbird-test.
+- Fixed missing arguments in `bowerbird::deps::define-dependency-constants` tests.
+### Security
+
+
 ## [0.2.0] - 2024-06-03
 
 ### Changed
