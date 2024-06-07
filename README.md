@@ -18,7 +18,7 @@ BOWERBIRD_DEPS.MK := $(WORKDIR_DEPS)/BOWERBIRD_DEPS/bowerbird_deps.mk
 $(BOWERBIRD_DEPS.MK):
 	@curl --silent --show-error --fail --create-dirs -o $@ -L \
 https://raw.githubusercontent.com/ic-designer/make-bowerbird-deps/\
-a84d91d5d726ab8639b330b453a3d899556b480f/src/bowerbird-deps/bowerbird-deps.mk
+53e2060a65686ec7e30bffa6079fc531c1eabbbc/src/bowerbird-deps/bowerbird-deps.mk
 include $(BOWERBIRD_DEPS.MK)
 
 # Load Dependencies
