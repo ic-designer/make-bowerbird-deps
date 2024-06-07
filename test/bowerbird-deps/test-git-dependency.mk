@@ -19,6 +19,17 @@ ifdef TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_ENTRY
 endif
 
 
+test-git-dependency-bowerbird-deps-bad-path:
+	rm -rf $(WORKDIR_TEST)/$@/deps/bowerbird-deps
+	mkdir -p $(WORKDIR_TEST)/$@/deps/bowerbird-deps/.git
+	! $(MAKE) FORCE TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_PATH=true
+
+ifdef TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_PATH
+    $(eval $(call bowerbird::git-dependency,$(WORKDIR_TEST)/test-git-dependency-bowerbird-deps-bad-path/deps/bowerbird-deps,\
+			https://github.com/ic-designer/make-bowerbird-deps.git,main,bowerbird.mk))
+endif
+
+
 test-git-dependency-bowerbird-deps-bad-url:
 	! $(MAKE) FORCE TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_URL=true
 	! test -d $(WORKDIR_TEST)/$@/deps/bowerbird-deps
