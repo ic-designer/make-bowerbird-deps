@@ -3,7 +3,6 @@
 MAKEFLAGS += --jobs
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --no-builtin-variables
-MAKEFLAGS += --no-print-directory
 MAKEFLAGS += --warn-undefined-variables
 
 # Constants
@@ -27,4 +26,6 @@ private_clean:
 	@echo "INFO: Cleaning complete."
 	@echo
 
-$(eval $(call bowerbird::generate-test-runner,private_test,test/,test*.mk))
+ifdef bowerbird::generate-test-runner
+    $(eval $(call bowerbird::generate-test-runner,private_test,test/,test*.mk))
+endif
