@@ -15,6 +15,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+
+### Added
+- Created tests for the makefile work directory variables.
+### Changed
+### Deprecated
+### Fixed
+- Wrapped the git-dependency command in an `ifdef` to avoid undefined variable warning
+  during recursive make.
+- Restored the print directory flag to assist with debug.
+- Restored verbosity to the git-dependency clone command to to assist with debug.
+### Security
+
+
 ## [0.3.0] - 2024-06-07
 
 ### Added
