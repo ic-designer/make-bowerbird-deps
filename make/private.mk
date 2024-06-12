@@ -3,7 +3,6 @@
 MAKEFLAGS += --jobs
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --no-builtin-variables
-MAKEFLAGS += --no-print-directory
 MAKEFLAGS += --warn-undefined-variables
 
 # Constants
