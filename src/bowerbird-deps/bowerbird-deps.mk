@@ -29,9 +29,7 @@ define bowerbird::git-dependency
 		@git clone --config advice.detachedHead=false --depth 1 \
 				--branch $$(BOWERBIRD_DEPENDENCY/$1/VERSION) \
 				$$(BOWERBIRD_DEPENDENCY/$1/URL) \
-				$$(BOWERBIRD_DEPENDENCY/$1/PATH) \
-                1>/dev/null \
-                2>/dev/null || \
+				$$(BOWERBIRD_DEPENDENCY/$1/PATH) || \
         (echo ERROR: Failed to clone dependency '$$(BOWERBIRD_DEPENDENCY/$1/URL)' && exit 1)
 		@test -n $$(BOWERBIRD_DEPENDENCY/$1/PATH)
 		@test -d $$(BOWERBIRD_DEPENDENCY/$1/PATH)/.git
