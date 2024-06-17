@@ -1,4 +1,6 @@
 test-git-dependency-bowerbird-deps-success:
+	test ! -d $(WORKDIR_TEST)/$@/deps/bowerbird-deps || rm -rf $(WORKDIR_TEST)/$@/deps/bowerbird-deps
+	test ! -d $(WORKDIR_TEST)/$@/deps/bowerbird-deps
 	$(MAKE) FORCE TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_SUCCESS=true
 	test -d $(WORKDIR_TEST)/$@/deps/bowerbird-deps
 	! test -d $(WORKDIR_TEST)/$@/deps/bowerbird-deps/.git
@@ -20,7 +22,7 @@ endif
 
 
 test-git-dependency-bowerbird-deps-bad-path:
-	rm -rf $(WORKDIR_TEST)/$@/deps/bowerbird-deps
+	test ! -d $(WORKDIR_TEST)/$@/deps/bowerbird-deps || rm -rf $(WORKDIR_TEST)/$@/deps/bowerbird-deps
 	mkdir -p $(WORKDIR_TEST)/$@/deps/bowerbird-deps/.git
 	! $(MAKE) FORCE TEST_GIT_DEPENDENCY_BOWERBIRD_DEPS_BAD_PATH=true
 
