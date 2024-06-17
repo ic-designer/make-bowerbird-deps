@@ -18,7 +18,7 @@
 #           a non-zero exit code.
 #
 #   Example:
-#       $(eval $(call bowerbird::git-dependency,deps/bowerbird-deps,\
+#       $(call bowerbird::git-dependency,deps/bowerbird-deps,\
 #               https://github.com/ic-designer/make-bowerbird-deps.git,\
 #               main,bowerbird.mk))
 #
@@ -46,7 +46,7 @@ endef
 #           a non-zero exit code.
 #
 #   Example:
-#       $(eval $(call bowerbird::git-dependency,deps/bowerbird-deps,\
+#       $(eval $(call bowerbird::git-dependency-implementation,deps/bowerbird-deps,\
 #               https://github.com/ic-designer/make-bowerbird-deps.git,\
 #               main,bowerbird.mk))
 #
