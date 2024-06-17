@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/ic-designer/make-bowerbird-deps/\
 include $(BOWERBIRD_DEPS.MK)
 
 # Load Dependencies
-$(eval $(call bowerbird::git-dependency,<id>,<url>,<version>,<entry>))
+$(call bowerbird::git-dependency,<id>,<url>,<version>,<entry>)
 ```
 
 ## Macros
@@ -35,7 +35,7 @@ bowerbird::git-dependency,<path>,<url>,<version>,<entry>
   Installs a bowerbird compatible git dependency for immediate use. This command will
   clone the dependency repo from the designated URL location into the specified path.
   The commands performs a shallow clone and deletes the git history of the clone to
-  prevent against accidental changes in the cloned repo.
+  prevent against accidental changes in the cloned repo from getting pushed back.
 
   Args:
       path: Path where the dependency repo is cloned.
@@ -51,7 +51,7 @@ bowerbird::git-dependency,<path>,<url>,<version>,<entry>
 
 
   Example:
-      $(eval $(call bowerbird::git-dependency,deps/bowerbird-deps,\
+      $(call bowerbird::git-dependency,deps/bowerbird-deps,\
               https://github.com/ic-designer/make-bowerbird-deps.git,\
-              main,bowerbird.mk))
+              main,bowerbird.mk)
 ```

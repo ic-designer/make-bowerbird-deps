@@ -20,12 +20,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Created tests for the makefile work directory variables.
 ### Changed
+- Updated the usage of bowerbird::git-dependency to no longer need the pattern
+  `$(eval $(call ... ))` and can instead simply use `$(call ...)`.
 ### Deprecated
 ### Fixed
 - Wrapped the git-dependency command in an `ifdef` to avoid undefined variable warning
   during recursive make.
 - Restored the print directory flag to assist with debug.
 - Restored verbosity to the git-dependency clone command to to assist with debug.
+- Fixed minor typos in the macro descriptions.
+- Improved the testing to make sure that expected files are generated from the commands
+  and not just old files from previous runs.
 ### Security
 
 
