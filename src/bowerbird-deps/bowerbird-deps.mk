@@ -17,13 +17,40 @@
 #       If the specified path is not empty, the cloning operation will fail and return
 #           a non-zero exit code.
 #
-#
 #   Example:
 #       $(eval $(call bowerbird::git-dependency,deps/bowerbird-deps,\
 #               https://github.com/ic-designer/make-bowerbird-deps.git,\
 #               main,bowerbird.mk))
 #
 define bowerbird::git-dependency
+$(eval $(call bowerbird::deps::git-dependency-implementation,$1,$2,$3,$4))
+endef
+
+# bowerbird::deps::git-dependency-implementation,<path>,<url>,<version>,<entry>
+#
+#   Implementation for installing a bowerbird compatible git dependency for immediate
+#   use. This command will clone the dependency repo from the designated URL location
+#   into the specified path. The commands performs a shallow clone and deletes the git
+#   history of the clone to prevent against accidental changes in the cloned repo.
+#
+#   Args:
+#       path: Path where the dependency repo is cloned.
+#       url: Location of the repo specified as a URL.
+#       version: Version of the repo specified as a tag or branch name.
+#       entry: Entry point of the repo specified as a relative file path.
+#
+#   Error:
+#       If the specified entry point cannot be created, the command will remove all
+#           partially installed files and terminate with exit 1.
+#       If the specified path is not empty, the cloning operation will fail and return
+#           a non-zero exit code.
+#
+#   Example:
+#       $(eval $(call bowerbird::git-dependency,deps/bowerbird-deps,\
+#               https://github.com/ic-designer/make-bowerbird-deps.git,\
+#               main,bowerbird.mk))
+#
+define bowerbird::deps::git-dependency-implementation
     $$(eval $$(call bowerbird::deps::define-dependency-constants,BOWERBIRD_DEPENDENCY/$1,$2,$3,$1,$4))
     $$(BOWERBIRD_DEPENDENCY/$1/PATH)/.:
 		@git clone --config advice.detachedHead=false --depth 1 \
@@ -47,6 +74,7 @@ define bowerbird::git-dependency
 
     include $$(BOWERBIRD_DEPENDENCY/$1.MK)
 endef
+
 
 # bowerbird::deps::define-constant,<name>,<value>
 #
