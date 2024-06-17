@@ -78,7 +78,7 @@ endef
 
 # bowerbird::deps::define-constant,<name>,<value>
 #
-#   Helper macro for emulating the delacaration of a readonly constant. If the variable
+#   Helper macro for emulating the declaration of a readonly constant. If the variable
 #   designated by name does not exit, this command will create it and assign it to the
 #   supplied value. If the variable already exists, this command throw an error it the
 #   supplied value is different than the current value.
